@@ -20,6 +20,15 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to root_path
+  end
+
+  def search
+    @lists = List.joins(bookmarks: :movie).where("movies.title ILIKE ?", "%#{params[:search]}%")
+  end
   private
 
   def list_params

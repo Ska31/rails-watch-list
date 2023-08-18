@@ -1,13 +1,23 @@
 <div class="container my-5">
+  <div class="d-flex justify-content-center align-items-center">
+    <h1><%= @list.name %></h1>
+    <%= link_to "<i class='fa-solid fa-trash mx-5 text-danger fs-3'></i>".html_safe, list_path(@list),
+    data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to "Add a movie", new_list_bookmark_path(@list), class:"btn btn-success mb-5 px-5  text-white fs-5" %>
+  </div>
+    <div class="cards">
+      <div class="d-flex flex-column align-items-center">
+        <% @list.movies.each do |movie| %>
+          <%= render "shared/cardposter", image: movie.poster_url, title: movie.title, description: movie.overview, rating: movie.rating%>
+          <% @list.bookmarks.each do |bookmark| %>
+            <%= link_to "<i class='fa-solid fa-trash mx-5 text-danger'> Delete this movie</i>".html_safe, bookmark_path(bookmark),
+            data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class:"my-3" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-
-  <h1><%= @list.name %></h1>
-  <% @list.movies.each do |movie| %>
-  <%= movie.title %>
-  <% end %>
-
-<%= link_to "Add a movie", new_list_bookmark_path(@list) %>
-<%= link_to 'Delete this list', destroy_user_session_path,
-  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-
+    <%= link_to "<i class='fa-solid fa-backward'> Back to the list</i>".html_safe, root_path, class:"btn btn-light"%>
 </div>

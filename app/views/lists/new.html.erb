@@ -2,7 +2,9 @@
 
   <h1>Create a new list</h1>
 
-  <%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= simple_form_for [@list] do |f| %>
     <%= f.input :name %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class:"btn btn-success my-3" %>
+  <% end %>
+  <%= link_to "<i class='fa-solid fa-backward'> Back to the list</i>".html_safe, root_path, class:"btn btn-light"%>
 </div>
