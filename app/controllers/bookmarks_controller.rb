@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_list, only: %w[show new create]
+
   def index
     @bookmarks = Bookmark.all
   end
